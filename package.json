@@ -1,0 +1,41 @@
+{
+  "name": "parse-values",
+  "version": "0.0.0",
+  "description": "parse a string of values with separators, quotes and escape, and returns an array",
+  "keywords": [],
+  "author": "Christophe Hurpeau <christophe@hurpeau.com> (https://christophe.hurpeau.com)",
+  "license": "ISC",
+  "repository": "git@github.com:christophehurpeau/parse-values.git",
+  "homepage": "https://github.com/christophehurpeau/parse-values",
+  "main": "./index.js",
+  "scripts": {
+    "build": "pob-build",
+    "clean": "rm -Rf docs dist test/node6 coverage",
+    "generate:test-coverage": "rm -Rf coverage/ ; node --harmony --es_staging node_modules/istanbul/lib/cli.js cover node_modules/.bin/_mocha -- --recursive --reporter=spec -u tdd test/node6",
+    "lint": "eslint --ext .js,.jsx --fix src/ test/src/",
+    "prepublish": "ln -s ../../git-hooks/pre-commit .git/hooks/pre-commit 2>/dev/null || true ; ln -s ../../git-hooks/post-checkout .git/hooks/post-checkout 2>/dev/null || true ; ln -s ../../git-hooks/post-merge .git/hooks/post-merge 2>/dev/null || true",
+    "preversion": "npm run lint && npm run build && pob-repository-check-clean",
+    "release": "pob-repository-check-clean && pob-release",
+    "test": "mocha --harmony --es_staging --recursive --bail -u tdd test/node6",
+    "test:watch": "mocha -w --harmony --es_staging --recursive --bail -u tdd test/node6",
+    "version": "pob-version",
+    "watch": "pob-watch"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "babel-preset-es2015-node6": "^0.2.0",
+    "babel-preset-flow": "^1.0.0",
+    "babel-preset-stage-1": "^6.13.0",
+    "coveralls": "^2.11.11",
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb-base": "^5.0.1",
+    "eslint-config-pob": "^7.0.1",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-import": "^1.12.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^3.0.0",
+    "pob-babel": "^7.0.0",
+    "pob-release": "^2.0.5",
+    "xunit-file": "^1.0.0"
+  }
+}
