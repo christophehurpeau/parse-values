@@ -23,11 +23,11 @@ console.log(parseValues('"test", "test \" 2"')); // ['test', 'test " 2']
 
 [npm-image]: https://img.shields.io/npm/v/parse-values.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/parse-values
-[daviddm-image]: https://david-dm.org//parse-values.svg?style=flat-square
-[daviddm-url]: https://david-dm.org//parse-values
-[circleci-status-image]: https://img.shields.io/circleci/project//parse-values/master.svg?style=flat-square
-[circleci-status-url]: https://circleci.com/gh//parse-values
-[travisci-status-image]: https://img.shields.io/travisci/project//parse-values/master.svg?style=flat-square
-[travisci-status-url]: https://travis-ci.org//parse-values
-[coverage-image]: https://img.shields.io/coveralls//parse-values/master.svg?style=flat-square
-[coverage-url]: https://.github.io/parse-values/coverage/lcov-report/
+[daviddm-image]: https://david-dm.org/christophehurpeau/parse-values.svg?style=flat-square
+[daviddm-url]: https://david-dm.org/christophehurpeau/parse-values
+[circleci-status-image]: https://img.shields.io/circleci/project/christophehurpeau/parse-values/master.svg?style=flat-square
+[circleci-status-url]: https://circleci.com/gh/christophehurpeau/parse-values
+[travisci-status-image]: https://img.shields.io/travisci/project/christophehurpeau/parse-values/master.svg?style=flat-square
+[travisci-status-url]: https://travis-ci.org/christophehurpeau/parse-values
+[coverage-image]: https://codecov.io/gh/christophehurpeau/parse-values/branch/master/graph/badge.svg?style=flat-square
+[coverage-url]: https://codecov.io/gh/christophehurpeau/parse-values

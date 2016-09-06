@@ -11,7 +11,7 @@
   "scripts": {
     "build": "pob-build",
     "clean": "rm -Rf docs dist test/node6 coverage",
-    "generate:test-coverage": "rm -Rf coverage/ ; node --harmony --es_staging node_modules/istanbul/lib/cli.js cover node_modules/.bin/_mocha -- --recursive --reporter=spec -u tdd test/node6",
+    "generate:test-coverage": "rm -Rf coverage/ ; NODE_ENV=production node --harmony --es_staging node_modules/istanbul/lib/cli.js cover node_modules/.bin/_mocha -- --recursive --reporter=spec -u tdd test/node6",
     "lint": "eslint --ext .js,.jsx --fix src/ test/src/",
     "prepublish": "ln -s ../../git-hooks/pre-commit .git/hooks/pre-commit 2>/dev/null || true ; ln -s ../../git-hooks/post-checkout .git/hooks/post-checkout 2>/dev/null || true ; ln -s ../../git-hooks/post-merge .git/hooks/post-merge 2>/dev/null || true",
     "preversion": "npm run lint && npm run build && pob-repository-check-clean",
