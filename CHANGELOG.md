@@ -1,3 +1,7 @@
+### v1.1.0
+
+- [`291ff27`](https://github.com/christophehurpeau/parse-values/commit/291ff271b9833bf0ee42c83ab71996cf0aa7698f) firstPotentialSeparators and includeFirstSeparator arguments (Christophe Hurpeau)
+
 ### v1.0.0
 
 - [`76f14c8`](https://github.com/christophehurpeau/parse-values/commit/76f14c8ef705adf1d75f9aa6a8507967c26e1e80) first commit (Christophe Hurpeau)
