@@ -4,59 +4,80 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = parseChoices;
-const quotes = ['"'.charCodeAt(), '\''.charCodeAt(), '`'.charCodeAt()];
+const quotes = ['"', '\'', '`', '«', '“', '‘'];
 
-const escape = '\\'.charCodeAt();
+const endQuotes = new Map([[quotes[0], quotes[0]], [quotes[1], quotes[1]], [quotes[2], quotes[2]], [quotes[3], '»'], [quotes[4], '”'], [quotes[5], '’']]);
 
-const basicSeparators = [','.charCodeAt(), ';'.charCodeAt(), '\r'.charCodeAt(), '\n'.charCodeAt()];
+const escape = '\\';
 
-const spaceSeparators = [...basicSeparators, ' '.charCodeAt()];
+const basicSeparators = [',', ';', '\r', '\n'];
 
-function parseChoices(text) {
-  const buffer = Buffer.from(`${ text }`);
-  const bufferLength = buffer.length;
+const spaceSeparators = [' '];
+
+function basicOrSpaceSeparators(text) {
+  if (basicSeparators.some(separator => text.includes(separator))) {
+    return basicSeparators;
+  }
+
+  return spaceSeparators;
+}
+
+function parseChoices(text, firstPotentialSeparators) {
+  let includeFirstSeparator = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+
+  const textLength = text.length;
   const choices = [];
 
-  let quote = null;
+  let endQuote = null;
   let currentChoice = '';
 
-  let separators = text.includes(',') || text.includes(';') ? basicSeparators : spaceSeparators;
+  let separators = firstPotentialSeparators || basicOrSpaceSeparators(text);
 
-  for (let i = 0; i < bufferLength; i++) {
-    const chr = buffer[i];
+  let checkFirstChoice = !firstPotentialSeparators ? () => null : i => {
+    if (choices.length === 0) {
+      const part = text.substr(i + 1);
+      separators = part.includes(',') || part.includes(';') ? basicSeparators : spaceSeparators;
+    } else {
+      checkFirstChoice = () => null;
+    }
+  };
 
-    if (!quote && separators.includes(chr)) {
-      if (currentChoice.length) {
-        choices.push(currentChoice);
+  for (let i = 0; i < textLength; i++) {
+    const chr = text[i];
+
+    if (!endQuote && separators.includes(chr)) {
+      if (currentChoice.length !== 0) {
+        checkFirstChoice(i);
+
+        if (includeFirstSeparator) currentChoice += chr;
+        choices.push(currentChoice.trim());
         currentChoice = '';
       }
-    } else if (quote && chr === escape && buffer[i + 1] === quote) {
+    } else if (endQuote && chr === escape && text[i + 1] === endQuote) {
       // skip quote
       i += 1;
-      currentChoice += String.fromCharCode(quote);
-    } else if (quote && chr === quote) {
-      choices.push(currentChoice);
+      currentChoice += endQuote;
+    } else if (endQuote && chr === endQuote) {
+      checkFirstChoice(i);
+      choices.push(currentChoice.trim());
       currentChoice = '';
-      quote = null;
-    } else if (!quote && quotes.includes(chr)) {
-      if (currentChoice.length) {
-        throw new Error(`Unexpected ${ String.fromCharCode(chr) } after ${ currentChoice }`);
+      endQuote = null;
+    } else if (!endQuote && quotes.includes(chr)) {
+      if (currentChoice.length !== 0) {
+        throw new Error(`Unexpected ${ chr } after ${ currentChoice }`);
       }
 
-      quote = chr;
-    } else {
-      const str = String.fromCharCode(chr);
-      if (currentChoice.length !== 0 || !str.match(/\s/)) {
-        currentChoice += str;
-      }
+      endQuote = endQuotes.get(chr);
+    } else if (currentChoice.length !== 0 || !chr.match(/\s/)) {
+      currentChoice += chr;
     }
   }
 
-  if (currentChoice.length) {
-    if (quote) {
-      throw new Error(`Unexpected end, the quote ${ String.fromCharCode(quote) } never ended.`);
+  if (currentChoice.length !== 0) {
+    if (endQuote) {
+      throw new Error(`Unexpected end, expecting ${ endQuote } after: ${ currentChoice }.`);
     } else {
-      choices.push(currentChoice);
+      choices.push(currentChoice.trim());
     }
   }
 

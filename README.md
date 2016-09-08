@@ -11,7 +11,7 @@ parse a string of values with separators, quotes and escape, and returns an arra
 npm install --save parse-values
 ```
 
-## Usage
+## Usage: parseValues(text: string, firstPotentialSeparators: ?Array<string>, includeFirstSeparator: boolean)
 
 ```js
 import parseValues from 'parse-values';
@@ -19,7 +19,16 @@ import parseValues from 'parse-values';
 console.log(parseValues('test test 2')); // ['test', 'test', '2']
 console.log(parseValues('test, test 2')); // ['test', 'test2']
 console.log(parseValues('"test", "test \" 2"')); // ['test', 'test " 2']
+
+// with first separator
+
+console.log(parseValues('title ? test test2', ['?'])); // ['title', 'test', 'test2']
+console.log(parseValues('title ? test test2', ['?'], true)); // ['title ?', 'test', 'test2']
+console.log(parseValues('"title" test test2', ['?'])); // ['title', 'test', 'test2']
+
+
 ```
+
 
 [npm-image]: https://img.shields.io/npm/v/parse-values.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/parse-values
