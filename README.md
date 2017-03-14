@@ -1,5 +1,7 @@
 # parse-values [![NPM version][npm-image]][npm-url]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/christophehurpeau/parse-values.svg)](https://greenkeeper.io/)
+
 parse a string of values with separators, quotes and escape, and returns an array
 
 [![Build Status][circleci-status-image]][circleci-status-url][![Travis Status][travisci-status-image]][travisci-status-url][![Dependency Status][daviddm-image]][daviddm-url]
