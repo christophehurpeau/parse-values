@@ -22,19 +22,19 @@
     "watch": "pob-watch"
   },
   "devDependencies": {
-    "babel-eslint": "^6.1.2",
-    "babel-preset-es2015-node6": "^0.3.0",
-    "babel-preset-flow": "^1.0.0",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-es2015-node6": "^0.4.0",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-1": "^6.13.0",
     "coveralls": "^2.11.12",
     "eslint": "^3.4.0",
-    "eslint-config-airbnb-base": "^6.0.0",
-    "eslint-config-pob": "^7.2.0",
-    "eslint-plugin-babel": "^3.3.0",
-    "eslint-plugin-import": "^1.14.0",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-config-pob": "^11.1.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.2.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.0.2",
-    "pob-babel": "^7.3.0",
-    "pob-release": "^2.1.2"
+    "pob-babel": "^17.1.1",
+    "pob-release": "^3.1.0"
   }
 }
